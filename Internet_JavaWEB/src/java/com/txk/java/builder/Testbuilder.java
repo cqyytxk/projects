@@ -7,6 +7,7 @@ public class Testbuilder {
 		configBuilder.second();
 		configBuilder.third();
 		configBuilder.forth();
+		System.out.println("封装完该对象所需要的配置");
 		Object object = Builder.builder(configBuilder);
 	}
 }
