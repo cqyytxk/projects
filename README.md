@@ -130,6 +130,9 @@ $ git push <remote> :<branch> (since Git v1.5.0)
 #或
   
 git push <remote> --delete <branch> (since Git v1.7.0)
+
+#将本地分支推送到远程
+$ git push ssm txk:txk 
   
 #发布标签:
   
