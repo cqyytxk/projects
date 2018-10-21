@@ -16,6 +16,9 @@ public class XmlMybatis {
 	static SqlSessionFactory sqlSessionFactory = null;
 
 	public static void main(String[] args) {
+		System.err.println(getSessionFactory());
+	}
+	public static SqlSessionFactory getSessionFactory(){
 		InputStream input;
 		String resource = "config/mybatis-config.xml";
 		try {
@@ -25,6 +28,6 @@ public class XmlMybatis {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return sqlSessionFactory;
 	}
-
 }

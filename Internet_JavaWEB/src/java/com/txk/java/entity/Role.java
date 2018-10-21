@@ -4,7 +4,7 @@ package com.txk.java.entity;
 public class Role {
 	private int role_id;
 	private String role_name;
-	private String desc;
+	private String description;
 	private String remark;
 	public int getRole_id() {
 		return role_id;
@@ -18,11 +18,11 @@ public class Role {
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
 	}
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getRemark() {
 		return remark;
@@ -33,7 +33,7 @@ public class Role {
 	@Override
 	public String toString() {
 		return "Role [role_id=" + role_id + ", role_name=" + role_name
-				+ ", desc=" + desc + ", remark=" + remark + "]";
+				+ ", description=" + description + ", remark=" + remark + "]";
 	}
 	
 }
