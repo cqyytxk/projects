@@ -6,6 +6,13 @@ public class Role {
 	private String role_name;
 	private String description;
 	private String remark;
+	private int role_sex;
+	public int getRole_sex() {
+		return role_sex;
+	}
+	public void setRole_sex(int role_sex) {
+		this.role_sex = role_sex;
+	}
 	public int getRole_id() {
 		return role_id;
 	}
@@ -33,7 +40,9 @@ public class Role {
 	@Override
 	public String toString() {
 		return "Role [role_id=" + role_id + ", role_name=" + role_name
-				+ ", description=" + description + ", remark=" + remark + "]";
+				+ ", description=" + description + ", remark=" + remark
+				+ ", role_sex=" + role_sex + "]";
 	}
+
 	
 }

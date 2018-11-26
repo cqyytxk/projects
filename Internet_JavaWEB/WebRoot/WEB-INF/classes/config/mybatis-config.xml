@@ -1,23 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!-- 引入文件 -->
+<properties resource="config/jdbc.properties"/>
+<!-- setting设置 -->
+    	<settings>
+			 <!-- 设置但JDBC类型为空时,某些驱动程序 要指定值,default: OTHER 默认为OTHER，我们指定为NULL --> 
+			 <!-- oracle -->
+	         <!-- <setting name="jdbcTypeForNull" value="VARCHAR"/>  -->
+	         <!--表明重用预编译的SQL语句-->
+	<!--          <setting name="defaultExecutorType" value="REUSE"/> -->
+	
+				<!-- 对在此配置文件下的所有cache 进行全局性开/关设置 默认true -->
+	         <setting name="cacheEnabled" value="false" />  
+	         <!--全局性设置懒加载。如果设为‘false’，则所有相关联的都会被初始化加载。 默认为true -->
+		     <setting name="lazyLoadingEnabled" value="true" />  
+		     <!-- 允许和不允许单条语句返回多个数据集（取决于驱动需求） 默认true -->
+		     <setting name="multipleResultSetsEnabled" value="true" />  
+		     <!--使用列标签代替列名称。不同的驱动器有不同的作法。参考一下驱动器文档，或者用这两个不同的选项进行测试一下。默认true  -->
+		     <setting name="useColumnLabel" value="true" />  
+		     <!--  允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，
+		     有一些驱动器不兼容不过仍然可以执行 默认false-->
+		     <setting name="useGeneratedKeys" value="false" /> 
+		     <!-- 如何自定映射列到字段 none 取消映射 partial 自动映射，不映射嵌套集 full会映射到结果集 -->
+		     <setting name="autoMappingBehavior"  value="PARTIAL" />
+		     <!-- 自动映射未知列行为 warn级别或以下会显示日志 -->
+		     <setting name="autoMappingUnknownColumnBehavior"  value="WARNING" />
+		     <!--配置和设定执行器，SIMPLE 执行器执行其它语句。REUSE 执行器可能重复使用prepared statements 语句，
+		     BATCH执行器可以重复执行语句和批量更新  默认 SIMPLE-->
+		     <setting name="defaultExecutorType" value="SIMPLE" />
+		     <!-- 数据库等待时间（秒） --> 
+		     <setting  name="defaultStatementTimeout" value="25"/>
+		     <!-- 默认数据驱动返回条数限制 -->
+		     <setting name = "defaultFetchSize" value = "100"/>
+		     <!-- 允许在嵌套语句中使用分页（rowBounds） 默认为false(允许) -->
+		     <setting name = "safeRowBoundsEnabled" value = "false"/>
+		     <!-- 是否开启驼峰命名规则映射 数据库A_COLUMN==>aColumn -->
+		     <setting name = "mapUnderscoreToCamelCase" value = "false"/>
+		     <!--  利用本地缓存机制 防止循环引用 默认值为session ，statement 对相同sqlsession不会共享数据 -->
+		     <setting name = "localCacheScope" value = "SESSION"/>
+		     <!-- 当参数为空时指定jdbc类型 -->
+		     <setting name = "jdbcTypeForNull" value = "OTHER"/>
+		     <!-- 指定那些对象方法使用延迟加载  -->
+		     <setting name = "lazyLoadTriggerMethods"  value="equals,clone,hashCode,toString"/>
+		</settings>
 	<!--配置别名  -->
 	<typeAliases>
 		<typeAlias alias="role" type="com.txk.java.entity.Role"/>
 	</typeAliases>
+	<typeHandlers>
+		<!-- <typeHandler jdbcType="VARCHAR"  javaType="string"  handler="com.txk.java.mybatis.typehandler.MyTypeHandler"/> -->
+		<!-- 可以配置包扫描 -->
+		<package name="com.txk.java.mybatis.typehandler"/>
+	</typeHandlers>
 	<!--配置数据库  -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC"></transactionManager>
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://localhost:3306/ssm"/>
-				<property name="username" value="root"/>
-				<property name="password" value="root"/>
+				<property name="driver" value="${database.driver}"/>
+				<property name="url" value="${database.url}"/>
+				<property name="username" value="${database.username}"/>
+				<property name="password" value="${database.password}"/>
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="mapper/RoleMapper.xml"></mapper>
+		<mapper resource="mapper/RoleTestMapper.xml"></mapper>
 	</mappers>
+	
 </configuration>

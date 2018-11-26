@@ -1,6 +1,9 @@
 package com.txk.java.mybatis;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
@@ -17,12 +20,15 @@ public class MybatisTest {
 		//查询
 //		getResult(sqlSessionFactory,1);
 		//保存
-		Role role = new Role();
-		role.setRole_name("运营");
-		role.setDescription("一切运营相关事情");
-		role.setRemark("扩展性");
-//		saveRole(sqlSessionFactory,role);
-		saveRole1(sqlSession,role);
+//		Role role = new Role();
+//		role.setRole_name("运营1");
+//		role.setDescription("一切运营相关事情");
+//		role.setRemark("扩展性");
+////		saveRole(sqlSessionFactory,role);
+//		saveRole1(sqlSession,role);
+		
+//		查询typeHandler
+		getResult(sqlSession,"运营");
 	}
 	public  static  void getResult(SqlSessionFactory sqlSessionFactory,int id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -58,5 +64,19 @@ public class MybatisTest {
 			sqlSession.close()	;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 		}
 		System.err.println(result);
+	}
+	
+	public  static  void getResult(SqlSession sqlSession,String para) {
+	
+		RoleDao dao = sqlSession.getMapper(RoleDao.class);
+		List<Map<String,Object>> list = dao.getRoleByName(para);//采用接口
+		sqlSession.commit();
+		if(sqlSession!=null){
+			sqlSession.close()	;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+		}
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).toString());	
+		}
+		
 	}
 }
